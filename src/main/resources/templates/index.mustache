@@ -4,6 +4,16 @@
     <div class="row">
         <div class="col-md-6">
             <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
+            <!-- userName이 있으면 밑에 함수 실행 -->
+            {{#userName}}
+                Logged in as: <span id="user">{{userName}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+            {{/userName}}
+            <!-- userName이 없으면 밑에 함수 실행 -->
+            {{^userName}}
+                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+                <!--구글 로그인 클릭 -> SecurityConfig -> CustomOAuth2UserService -->
+            {{/userName}}
         </div>
     </div>
 
