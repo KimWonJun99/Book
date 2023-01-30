@@ -12,7 +12,8 @@
             <!-- userName이 없으면 밑에 함수 실행 -->
             {{^userName}}
                 <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
-                <!--구글 로그인 클릭 -> SecurityConfig -> CustomOAuth2UserService -->
+                <!--구글 로그인 클릭 -> 구글에서 승인하면(설정했기때문)-> SecurityConfig -> CustomOAuth2UserService -->
+                <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
             {{/userName}}
         </div>
     </div>

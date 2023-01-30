@@ -31,7 +31,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 * auth패키지안에 dto 패키지 생성 -> OAuthAttributes 클래스 생성
 * dto 패키지안에 SessionUser 클래스 생성*/
 
-@EnableJpaAuditing
+/*네이버 연동 방법
+* https://developers.naver.com/apps/#/register?api=nvlogin 입력
+* 네이버 로그인 -> 애플리케이션 등록(애플리케이션 이름 + 사용API(네이버로그인) + 서비스환경(pc웹)
+*               + 로그인 오픈 API 서비스URL(http://localhost:8080/login/oauth2/code/naver)
+*                               콜백 URL(http://localhost:8080/login/oauth2/code/naver)
+*application-oauth.properties에서 설정
+* OAuthAttributes에서 코드추가
+* */
+//@EnableJpaAuditing -> JpaConfig에 따로 만들기
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {

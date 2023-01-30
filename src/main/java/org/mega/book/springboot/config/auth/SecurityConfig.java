@@ -15,11 +15,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
-                .authorizeRequests()
+                .authorizeRequests()// 인증요청이오면
                 .antMatchers("/","/css/**","images/**","/js/**","h2-console/**","/profile").permitAll()
-                .antMatchers("/api/v1/**").hasRole(Role.USER.name())
+                .antMatchers("/api/v1/**").hasRole(Role.USER.name()) // 로그인 되어있으면(유저 이름을 가지고있으면)가능
                 .and()
-                .logout().logoutSuccessUrl("/")//로그아웃이 성공하면 "/"페이지로 간다.
+                .logout().logoutSuccessUrl("/")//로그아웃이 성공하면 "/"메인페이지로 간다.
                 .and()
                 .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
     }

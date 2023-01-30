@@ -38,7 +38,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         User user = saveOrUpdate(attributes);
 
-        httpSession.setAttribute("user",new SessionUser(user));
+        httpSession.setAttribute("user",new SessionUser(user)); // 이게 핵심
 
         return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 attributes.getAttributes(),
@@ -47,8 +47,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     private User saveOrUpdate(OAuthAttributes attributes){
         User user = userRepository.findByEmail(attributes.getEmail())
-                .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
-                .orElse(attributes.toEntity());
-        return userRepository.save(user);
+                .map(entity -> entity.update(attributes.getName(), attributes.getPicture())) // 객체 있으면 수정
+                .orElse(attributes.toEntity()); // 객체 없으면 생성
+        return userRepository.save(user); // db에 저장
     }
 }
