@@ -22,10 +22,20 @@ import java.util.Collections;
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private final UserRepository userRepository; // 쿼리문 실행
     private final HttpSession httpSession; // Http 세션
+    //Session은 클라이언트와 서버간의 연결이 지속적으로 유지되는 상태를 뜻함
+    //하나의 고유한 객체
+
+    //Http 특성
+    //클라이언트와 서버가 요청과 응답을 주고 받으면 연결이 끊어짐
+    //클라이언트가 다시 요청하면 서버는 이전 요청을 기억할 수 없음.
+    //클라이언트와 서버는 서로 상태를 유지하지 않는다.
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException{
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService(); // 업캐스팅
+        //DefaultOAuth2UserService는 OAuth2UserService의 구현체이다.
+        //해당 클래스를 이용해서 userRequest에 있는 정보를 빼낼 수 있다.
+
         OAuth2User oAuth2User = delegate.loadUser(userRequest); // loadUser()는 자식이 정의한 함수로 실행
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId(); // 등록된 아이디 빼기
